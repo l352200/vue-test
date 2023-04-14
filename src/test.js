@@ -31,7 +31,7 @@ mySearch = function (src, sub) {
     return result > -1;
 };
 var a = mySearch('a2', 'a');
-console.log(a, 'mySearch');
+console.log(a, 'mySearch1');
 var mySearch2;
 mySearch2 = function (a, b) {
     var aa = Number(a);
