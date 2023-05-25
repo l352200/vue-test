@@ -1,23 +1,22 @@
-
 interface labelObj {
-    label1: string,
-    label2?: number,
-    label3?: string,
-    //类似const 区别是const 针对变量  readonly 针对属性
-    readonly label4?: number
+  label1: string;
+  label2?: number;
+  label3?: string;
+  //类似const 区别是const 针对变量  readonly 针对属性
+  readonly label4?: number;
 }
 
 function look(a: labelObj) {
-    // console.log(a.label1);
-    // console.log(a.label4);
-    //没定义就变成undefined了 因为readonly 也不能再次赋值
+  // console.log(a.label1);
+  // console.log(a.label4);
+  //没定义就变成undefined了 因为readonly 也不能再次赋值
 }
 
-let obj = { label1: 'hello', label4: 22 }
-look(obj)
+let obj = { label1: "hello", label4: 22 };
+look(obj);
 
 interface StringArray {
-    [index: number]: string;
+  [index: number]: string;
 }
 
 let myArray: StringArray;
@@ -28,30 +27,29 @@ let myStr: string = myArray[0];
 // console.log(myStr, 'myStr');
 
 interface SearchFunc {
-    //函数
-    (source: string, subString: string): boolean;
-  }
-let mySearch: SearchFunc;
-mySearch = function(src, sub) {
-    let result = src.search(sub);
-    return result > -1;
+  //函数
+  (source: string, subString: string): boolean;
 }
-let a=mySearch('a2','a')
+let mySearch: SearchFunc;
+mySearch = function (src, sub) {
+  let result = src.search(sub);
+  return result > -1;
+};
+let a = mySearch("a2", "a");
 // console.log(a,'mySearch');
 
 interface SearchFunc2 {
-    //函数
-    (source: string, subString: string): number;
-  }
-let mySearch2: SearchFunc2
-mySearch2 = function (a, b) {
-    let aa=Number(a)
-    let bb=Number(b)
-    return aa-bb
+  //函数
+  (source: string, subString: string): number;
 }
+let mySearch2: SearchFunc2;
+mySearch2 = function (a, b) {
+  let aa = Number(a);
+  let bb = Number(b);
+  return aa - bb;
+};
 // console.log(mySearch2('22a','b21'),'test');
 // console.log(mySearch2('22','21'),'test2');
-
 
 // class Animal {
 //     name: string;
@@ -106,10 +104,10 @@ mySearch2 = function (a, b) {
 //     }
 // }
 // class AnalogClock implements ClockInterface {
-//     constructor(h: number, m: number) { 
+//     constructor(h: number, m: number) {
 //         console.log(h,'h');
 //         console.log(m,'m');
-        
+
 //     }
 //     tick() {
 //         console.log("tick tock");
@@ -138,32 +136,85 @@ mySearch2 = function (a, b) {
 // c.reset();
 // c.interval = 5.0;
 
+// class Animal {
+//     name: string;
+//     constructor(theName: string) { this.name = theName; }
+//     move(distanceInMeters: number = 0) {
+//         console.log(`${this.name} moved ${distanceInMeters}m.`);
+//     }
+// }
 
-class Animal {
-    name: string;
-    constructor(theName: string) { this.name = theName; }
-    move(distanceInMeters: number = 0) {
-        console.log(`${this.name} moved ${distanceInMeters}m.`);
-    }
+// class Snake extends Animal {
+//     constructor(name: string) { super(name); }
+//     move(distanceInMeters = 5) {
+//         console.log("Slithering...");
+//         super.move(distanceInMeters);
+//     }
+// }
+
+// class Horse extends Animal {
+//     constructor(name: string) { super(name); }
+//     move(distanceInMeters = 45) {
+//         console.log("Galloping...");
+//         super.move(distanceInMeters);
+//     }
+// }
+
+// let sam = new Snake("Sammy the Python");
+// let tom: Animal = new Horse("Tommy the Palomino");
+// sam.move();
+// tom.move(34);
+
+function testMethods(n: number, a: Array<number | string>, s: string) {
+  var text:any;
+  switch (n) {
+    //splice 截取数组 第一个参数 起始位置 第二个参数截取多少个 改变原数组为剩余未被截取的部分 返回值为截取部分
+    case 1:
+      text = a.splice(1, 4);
+      console.log(a, "splice-a");
+      console.log(text, "splice-text");
+      break;
+    //slice 截取数组 第一个参数 起始位置 第二个参数 终止位置（该索引不执行） 不改变原数组 返回值为截取部分
+    case 2:
+      text = a.slice(1, 3);
+      console.log(a, "slice-a");
+      console.log(text, "slice");
+      break;
+    //pop 删除数组最后一个元素 无参数 改变原数组 返回值为被删除的元素
+    case 3:
+      text = a.pop();
+      console.log(a, "pop-a");
+      console.log(text, "pop");
+      break;
+    //join 把数组各元素分隔成字符串 第一个参数 分隔符（字符串） 不改变原数组 返回值为被分隔后的字符串
+    case 4:
+      text = a.join("-");
+      console.log(a, "join-a");
+      console.log(text, "join");
+      break;
+    //unshift 向开头添加若干元素 参数为添加的元素 返回值为改变后数组长度
+    case 5:
+      text = a.unshift('hello', 'sakiro');
+      console.log(a, "unshift-a");
+      console.log(text, "unshift");
+      break;
+    //shift 删除数组第一个元素 无参数 改变原数组 返回值为被删除的元素
+    case 6: 
+      text = a.shift();
+      console.log(a, "shift-a");
+      console.log(text, "shift");
+      break;
+    //split 把按一定分隔符分隔好的字符串转成数组 参数为分隔符 返回值为原数组
+    case 7:
+      text = s.split(",");
+      console.log(s, "split-a");
+      console.log(text, "split");
+      break;
+    default:
+      break;
+  }
 }
-
-class Snake extends Animal {
-    constructor(name: string) { super(name); }
-    move(distanceInMeters = 5) {
-        console.log("Slithering...");
-        super.move(distanceInMeters);
-    }
+//测试若干方法
+for (var i = 0; i < 8; i++) {
+  testMethods(i, [1, 2, 3, 4, 5, 6, 7, 8, 9], "1,2,3,4,5,6,7,8,9");
 }
-
-class Horse extends Animal {
-    constructor(name: string) { super(name); }
-    move(distanceInMeters = 45) {
-        console.log("Galloping...");
-        super.move(distanceInMeters);
-    }
-}
-
-let sam = new Snake("Sammy the Python");
-let tom: Animal = new Horse("Tommy the Palomino");
-sam.move();
-tom.move(34);
