@@ -166,7 +166,7 @@ mySearch2 = function (a, b) {
 // tom.move(34);
 
 function testMethods(n: number, a: Array<number | string>, s: string) {
-  var text:any;
+  var text: any;
   switch (n) {
     //splice 截取数组 第一个参数 起始位置 第二个参数截取多少个 改变原数组为剩余未被截取的部分 返回值为截取部分
     case 1:
@@ -174,7 +174,7 @@ function testMethods(n: number, a: Array<number | string>, s: string) {
       console.log(a, "splice-a");
       console.log(text, "splice-text");
       break;
-    //slice 截取数组 第一个参数 起始位置 第二个参数 终止位置（该索引不执行） 不改变原数组 返回值为截取部分
+    //slice 截取数组 第一个参数 起始位置 第二个参数 终止位置（该索引不执行）含头不含尾 不改变原数组 返回值为截取部分
     case 2:
       text = a.slice(1, 3);
       console.log(a, "slice-a");
@@ -194,12 +194,12 @@ function testMethods(n: number, a: Array<number | string>, s: string) {
       break;
     //unshift 向开头添加若干元素 参数为添加的元素 返回值为改变后数组长度
     case 5:
-      text = a.unshift('hello', 'sakiro');
+      text = a.unshift("hello", "sakiro");
       console.log(a, "unshift-a");
       console.log(text, "unshift");
       break;
     //shift 删除数组第一个元素 无参数 改变原数组 返回值为被删除的元素
-    case 6: 
+    case 6:
       text = a.shift();
       console.log(a, "shift-a");
       console.log(text, "shift");
@@ -210,6 +210,12 @@ function testMethods(n: number, a: Array<number | string>, s: string) {
       console.log(s, "split-a");
       console.log(text, "split");
       break;
+    //subString
+    //substr
+    // 相同点：如果只是写一个参数，两者的作用都一样：都是是截取字符串从当前下标以后直到字符串最后的字符串片段。
+    // 不同点：第二个参数
+    // substr（startIndex,lenth）： 第二个参数是截取字符串的长度（从起始点截取某个长度的字符串）；
+    // substring（startIndex, endIndex）： 第二个参数是截取字符串最终的下标 （截取2个位置之间的字符串,‘含头不含尾’）。
     default:
       break;
   }
