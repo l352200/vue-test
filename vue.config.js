@@ -1,5 +1,5 @@
 const path = require('path');
-
+const PORT = process.env.PORT || 8899
 function resolve(dir) {
   return path.join(__dirname, dir);
 }
@@ -25,7 +25,7 @@ module.exports = {
     }
 },
   devServer: { // 自定义服务配置
-    port: 8899, // 修改的端口号
+    port: PORT, // 修改的端口号
     open: true
   },
   // lintOnSave:false

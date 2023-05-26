@@ -224,3 +224,4 @@ function testMethods(n: number, a: Array<number | string>, s: string) {
 for (var i = 0; i < 8; i++) {
   testMethods(i, [1, 2, 3, 4, 5, 6, 7, 8, 9], "1,2,3,4,5,6,7,8,9");
 }
+
