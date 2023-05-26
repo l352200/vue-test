@@ -26,7 +26,20 @@ module.exports = {
 },
   devServer: { // 自定义服务配置
     port: PORT, // 修改的端口号
-    open: true
+    open: false,
+    proxy: {
+      '/api': {
+          target: 'http://127.0.0.1:3004',
+          changeOrigin: true,
+          ws: true,
+          // secure: false
+      },
+      '/wx': {
+          target: 'http://localhost:3001',
+          changeOrigin: true,
+          // secure: false
+      }
+  }
   },
   // lintOnSave:false
 }
