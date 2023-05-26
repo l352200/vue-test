@@ -5,12 +5,12 @@
 </template>
 
 <script>
-import WebSite from './webSite.vue'
+// import WebSite from './webSite.vue'
 
 export default {
   name: 'App',
   components: {
-    WebSite
+    // WebSite
   }
 }
 </script>
@@ -22,6 +22,12 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  /* margin-top: 60px; */
+  
+}
+html, body {
+    padding: 0;
+    margin: 0;
+    background: rgb(235,238,245);
 }
 </style>

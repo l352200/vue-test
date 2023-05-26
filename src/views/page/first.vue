@@ -13,7 +13,6 @@ export default {
   },
   methods: {
     request() {
-      console.log(window, "window");
       //type 1
       // config.http({
       //   method: "get",
@@ -35,6 +34,7 @@ export default {
       }
       getUser(params).then(res=>{
         console.log(res,'res');
+          this.$alert(res, "res");
       })
     },
   },

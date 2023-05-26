@@ -1,15 +1,34 @@
+
+import Layout from '@/layout'
 export const constantRoutes = [{
   path: '/',
-  name: "webSite",
-  component: () =>
-      import ( /* webpackChunkName: "website" */ '../webSite')
-}, // 首页
-{
-  path: '/page/first',
-  name: "first",
-  component: () =>
-      import ( /* webpackChunkName: "register" */ '@/views/page/first')
-}, 
+  name: "base",
+  component: Layout,
+  redirect: '/home',
+  //   component: () =>
+  //       import ( /* webpackChunkName: "website" */ '../layout')
+  // }, // 首页
+  children: [{
+    path: '/home',
+    name: "home",
+    component: () =>
+        import ( /* webpackChunkName: "register" */ '@/views/home/index')
+  }, {
+    path: '/page/first',
+    name: "first",
+    component: () =>
+        import ( /* webpackChunkName: "register" */ '@/views/page/first')
+    },
+    // 其他路径重置为home
+    {
+    path: ':code',
+    props: true,
+    component: () => import('@/views/home/index'),
+    name: 'home',
+    meta: { title: '首页' }
+  },]
+},
+
 ]
 
 //  
