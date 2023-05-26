@@ -1,7 +1,6 @@
 <template>
-  <div>
+  <div class="app-container first-container">
     first
-    <el-button @click="alert">提示</el-button>
     <el-button @click="request">请求</el-button>
   </div>
 </template>
@@ -13,14 +12,12 @@ export default {
     return {};
   },
   methods: {
-    alert() {
-      this.$alert("测试输出");
-    },
     request() {
       console.log(window, "window");
-      // window.config.http({
+      //type 1
+      // config.http({
       //   method: "get",
-      //   url: "getUser",
+      //   url: "/user/getUser",
       //   data: {
       //     id: "1",
       //   },
@@ -32,6 +29,7 @@ export default {
       //     this.$alert(res, "res");
       //   },
       // });
+      // type 2
       let params={
         id:'1'
       }
@@ -43,4 +41,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.first-container {
+  border: 1px black;
+}
+</style>
