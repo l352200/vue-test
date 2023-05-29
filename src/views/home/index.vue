@@ -5,10 +5,13 @@
         <!-- 左半边布局 -->
         <div class="left-inner">
           <list title="最新咨讯" :list="list1" :count="count1"></list>
+          <list title="最新咨讯" :list="list1" :count="count1"></list>
+          <list title="最新咨讯" :list="list1" :count="count1"></list>
         </div>
         <!-- 右半边布局 -->
         <div class="right-inner">
-          右
+          <img class="head-bg" :src="headImg" alt="">
+          <related-matters></related-matters>
         </div>
       </div>
     </div>
@@ -17,14 +20,18 @@
 
 <script>
 import list from './components/list.vue'
+import relatedMatters from './components/relatedMatters.vue'
+import headImg from '@assets/images/right-head.jpg'
 export default {
   components:{
-    list
+    list,
+    relatedMatters
   },
   data(){
     return{
       list1:[],
-      count1:0
+      count1:0,
+      headImg,
     }
   },
   created(){
@@ -38,8 +45,7 @@ export default {
         data: {
         },
         success: (res) => {
-          console.log(res, "res");
-          this.list1=res.list
+          this.list1=res.rows
           this.count1=res.count
         },
         error: (res) => {
@@ -62,13 +68,15 @@ export default {
       justify-content: space-around;
       .left-inner{
         width: 700px;
-        border-top: 2px double rgba(212, 210, 210, 0.699);
         padding: 10px;
       }
       .right-inner{
         width:500px;
         border: 1px solid black;
         padding: 10px;
+        .head-bg{
+          width: 480px;
+        }
       }
     }
   }

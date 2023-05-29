@@ -33,7 +33,7 @@ export default {
       default: () => 0
     },
     // tips跳转地址
-    url:{
+    url: {
 
     },
   },
@@ -55,7 +55,9 @@ export default {
 
 <style lang="scss" scoped>
 .list-container {
+  border-top: 2px double rgba(212, 210, 210, 0.699);
   width: 100%;
+  margin-bottom: 40px;
   .title {
     font-size: 28px;
     font-weight: 600;
