@@ -26,6 +26,12 @@ export default {
     AppHeader,
     AppFooter
   },
+  computed:{
+    cachedViews(){
+      //需要使用缓存的组件 需要用vuex存
+      return ''
+    }
+  },
   methods:{
   }
 };
