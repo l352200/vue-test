@@ -4,8 +4,7 @@
       <div class="home-inner">
         <!-- 左半边布局 -->
         <div class="left-inner">
-          左
-          <list></list>
+          <list title="最新咨讯" :list="list1" :count="count1"></list>
         </div>
         <!-- 右半边布局 -->
         <div class="right-inner">
@@ -21,6 +20,33 @@ import list from './components/list.vue'
 export default {
   components:{
     list
+  },
+  data(){
+    return{
+      list1:[],
+      count1:0
+    }
+  },
+  created(){
+    this.getNews()
+  },
+  methods:{
+    getNews(){
+      config.http({
+        method: "get",
+        url: "/info/getNews",
+        data: {
+        },
+        success: (res) => {
+          console.log(res, "res");
+          this.list1=res.list
+          this.count1=res.count
+        },
+        error: (res) => {
+          this.$alert(res, "res");
+        },
+      });
+    }
   }
 }
 </script>
@@ -36,7 +62,7 @@ export default {
       justify-content: space-around;
       .left-inner{
         width: 700px;
-        border: 1px solid black;
+        border-top: 2px double rgba(212, 210, 210, 0.699);
         padding: 10px;
       }
       .right-inner{
