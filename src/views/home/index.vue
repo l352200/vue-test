@@ -11,7 +11,9 @@
         <!-- 右半边布局 -->
         <div class="right-inner">
           <img class="head-bg" :src="headImg" alt="">
-          <related-matters></related-matters>
+          <related-matters title="相关事项" :list="list2" :count="count2"></related-matters>
+          <related-matters title="相关事项" :list="list2" :count="count2"></related-matters>
+          <related-matters title="相关事项" :list="list2" :count="count2"></related-matters>
         </div>
       </div>
     </div>
@@ -23,36 +25,54 @@ import list from './components/list.vue'
 import relatedMatters from './components/relatedMatters.vue'
 import headImg from '@assets/images/right-head.jpg'
 export default {
-  components:{
+  components: {
     list,
     relatedMatters
   },
-  data(){
-    return{
-      list1:[],
-      count1:0,
+  data() {
+    return {
+      list1: [],
+      count1: 0,
+            list2: [],
+      count2: 0,
       headImg,
     }
   },
-  created(){
-    this.getNews()
+  created() {
+    this.getNews();
+    this.getMatters();
   },
-  methods:{
-    getNews(){
+  methods: {
+    getNews() {
       config.http({
         method: "get",
         url: "/info/getNews",
         data: {
         },
         success: (res) => {
-          this.list1=res.rows
-          this.count1=res.count
+          this.list1 = res.rows
+          this.count1 = res.count
         },
         error: (res) => {
           this.$alert(res, "res");
         },
       });
-    }
+    },
+    getMatters() {
+      config.http({
+        method: "get",
+        url: "/info/getMatters",
+        data: {
+        },
+        success: (res) => {
+          this.list2 = res.rows
+          this.count2 = res.count
+        },
+        error: (res) => {
+          this.$alert(res, "res");
+        },
+      });
+    },
   }
 }
 </script>
@@ -63,18 +83,17 @@ export default {
   .home-container {
     width: 1400px;
     margin: 0 auto;
-    .home-inner{
+    .home-inner {
       display: flex;
       justify-content: space-around;
-      .left-inner{
+      .left-inner {
         width: 700px;
         padding: 10px;
       }
-      .right-inner{
-        width:500px;
-        border: 1px solid black;
+      .right-inner {
+        width: 500px;
         padding: 10px;
-        .head-bg{
+        .head-bg {
           width: 480px;
         }
       }

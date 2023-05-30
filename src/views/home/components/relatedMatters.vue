@@ -9,8 +9,8 @@
           更多+
         </div>
       </div>
-      <div class="matters-info">
-        · 这是一条相关事项的信息
+      <div class="matters-info" v-for="item in list" :key="item.id">
+        ● {{item.title}}
       </div>
     </div>
   </div>
@@ -50,6 +50,7 @@ export default {
 <style lang="scss" scoped>
 .matters-wrapper {
   width: 100%;
+  margin-bottom: 10px;
   .matters-container {
     width: 480px;
     .matters-head-inner {
@@ -81,9 +82,13 @@ export default {
       }
     }
   }
-  .matters-info{
-    font-size:16px;
+  .matters-info {
+    font-size: 16px;
     margin-bottom: 10px;
+    padding: 5px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 }
 </style>

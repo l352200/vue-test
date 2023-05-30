@@ -88,6 +88,9 @@ export default {
       margin-left: 20px;
       border-bottom: 1px solid rgba(165, 164, 164, 0.753);
       width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
     }
   }
   .tip {
