@@ -10,7 +10,7 @@
         </div>
       </div>
       <div class="matters-info">
-        · 这是一条相关事项的信息
+        · 这是一条相关事项的信息1
       </div>
     </div>
   </div>
