@@ -29,7 +29,7 @@ module.exports = {
   // transpileDependencies: true,
   chainWebpack: (config) => {
     // 处理浏览器兼容
-    config.entry('main').add('babel-polyfill')
+    // config.entry('main').add('babel-polyfill')
     // 设置目录别名
     config.resolve.alias
       .set("@src", resolve("./src"))
