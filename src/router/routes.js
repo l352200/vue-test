@@ -14,6 +14,11 @@ export const constantRoutes = [{
     name: "home",
     component: () =>
       import( /* webpackChunkName: "register" */ '@/views/home/index')
+  },{
+    path: '/login',
+    name: "login",
+    component: () =>
+      import( /* webpackChunkName: "register" */ '@/views/login')
   },
   // 其他路径重置为home
   {

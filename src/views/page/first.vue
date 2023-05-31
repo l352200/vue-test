@@ -16,7 +16,7 @@ export default {
       //type 1
       // config.http({
       //   method: "get",
-      //   url: "/user/getUser",
+      //   url: "/getUser",
       //   data: {
       //     id: "1",
       //   },

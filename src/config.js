@@ -1,9 +1,35 @@
 import axios from 'axios';
 import {Loading} from 'element-ui';
 var config = {
-  host:"/api",
+    host: "/api",
+    alertMsg(msg, type, duration) {
+        alert(msg, "提示", {
+            confirmButtonText: '确定',
+            distinguishCancelAndClose: true,
+            dangerouslyUseHTMLString: true,
+            type: type || 'success',
+        });
+        /* alertMsg({
+            message: msg,
+            type: type || 'success',
+            showClose: true,
+            duration: duration == null ? 3000 : duration,
+            dangerouslyUseHTMLString: true,
+        }); */
+    },
+    alert(msg, params) {
+        if (typeof (params) == "object" && params) {
+            params.distinguishCancelAndClose = true;
+        }
+        alert(msg, '提示', params || {
+            confirmButtonText: '确定',
+            distinguishCancelAndClose: true,
+            dangerouslyUseHTMLString: true,
+        });
+    },
   http:function(params) {
       var me = this;
+      
       // if (me.urls[params.url]) {
       //     params.url = me.urls[params.url];
       // }

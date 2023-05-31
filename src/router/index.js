@@ -23,5 +23,8 @@ const createRouter = () => new Router({
 })
 
 const routes = createRouter()
-
+export function resetRouter() {
+    const newRouter = createRouter()
+    routes.matcher = newRouter.matcher // reset router
+  }
 export default routes
