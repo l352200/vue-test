@@ -1,5 +1,6 @@
 
 import Layout from '@/layout'
+//带头尾组件
 export const constantRoutes = [{
   path: '/',
   name: "base",
@@ -12,15 +13,10 @@ export const constantRoutes = [{
     path: '/home',
     name: "home",
     component: () =>
-        import ( /* webpackChunkName: "register" */ '@/views/home/index')
-  }, {
-    path: '/page/first',
-    name: "first",
-    component: () =>
-        import ( /* webpackChunkName: "register" */ '@/views/page/first')
-    },
-    // 其他路径重置为home
-    {
+      import( /* webpackChunkName: "register" */ '@/views/home/index')
+  },
+  // 其他路径重置为home
+  {
     path: ':code',
     props: true,
     component: () => import('@/views/home/index'),
@@ -31,8 +27,21 @@ export const constantRoutes = [{
 
 ]
 
-//  
-export const couponRoutes=[]
+// 不带头尾组件
+export const couponRoutes = [
+  {
+    path: '/page/first',
+    name: "first",
+    component: () =>
+      import( /* webpackChunkName: "register" */ '@/views/page/first')
+  }, {
+    path: '/page/info/:id/:type',
+    props: true,
+    name: "info",
+    component: () =>
+      import( /* webpackChunkName: "register" */ '@/views/page/info')
+  }
+]
 // export const couponRoutes = [{
 //   path: '/coupon/home/index',
 //   component: () =>

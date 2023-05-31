@@ -10,7 +10,7 @@
         </div>
       </div>
       <div class="matters-info" v-for="item in list" :key="item.id">
-        ● {{item.title}}
+        ● <span class="text" @click="handleJumpMatters(item.id)">{{item.title}}</span>
       </div>
     </div>
   </div>
@@ -43,6 +43,9 @@ export default {
     handleJump(url) {
 
     },
+    handleJumpMatters(id){
+      this.$router.push('/page/info/'+id+'/2')
+    }
   }
 }
 </script>
@@ -51,6 +54,7 @@ export default {
 .matters-wrapper {
   width: 100%;
   margin-bottom: 10px;
+  height: 220px;
   .matters-container {
     width: 480px;
     .matters-head-inner {
@@ -89,6 +93,9 @@ export default {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    .text{
+      cursor: pointer;
+    }
   }
 }
 </style>

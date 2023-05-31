@@ -7,7 +7,9 @@
         <div>{{handleDate(item.createdAt,'yyyy-MM')}}</div>
       </div>
       <div class="text-item">
+        <span @click="handleJumpNews(item.id)" class="text">
         {{item.title}}
+        </span>
       </div>
     </div>
     <div @click="handleTips" class="tip">总共{{count}}条信息，点击查看更多</div>
@@ -42,6 +44,10 @@ export default {
       handleTips() {
 
       },
+      //跳转单条咨询页
+      handleJumpNews(id){
+        this.$router.push('/page/info/'+id+'/1')
+      },
     }
   },
   methods: {
@@ -57,7 +63,9 @@ export default {
 .list-container {
   border-top: 2px double rgba(212, 210, 210, 0.699);
   width: 100%;
+  height: 320px;
   margin-bottom: 40px;
+  position: relative;
   .title {
     font-size: 28px;
     font-weight: 600;
@@ -91,13 +99,18 @@ export default {
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
+      .text{
+        cursor: pointer;
+      }
     }
   }
   .tip {
     cursor: pointer;
     font-size: 14px;
-    float: right;
     color: #74a7da;
+    position: absolute;
+    right: 0;
+    bottom: -20px;
   }
 }
 </style>

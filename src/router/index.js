@@ -5,11 +5,13 @@ import { constantRoutes, couponRoutes } from './routes';
 // 解决重复点击相同路由报错Bug，后续版本官方会解决
 const routerPush = Router.prototype.push;
 Router.prototype.push = function push (location) {
-    return routerPush.call(this, location).catch(err => err);
+    return routerPush.call(this, location);
+    // return routerPush.call(this, location).catch(err => err);
 }
 const routerReplace = Router.prototype.replace;
 Router.prototype.replace = function replace (location) {
-    return routerReplace.call(this, location).catch(err => err);
+    return routerReplace.call(this, location);
+    // return routerReplace.call(this, location).catch(err => err);
 }
 
 Vue.use(Router);

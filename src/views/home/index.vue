@@ -46,7 +46,7 @@ export default {
     getNews() {
       config.http({
         method: "get",
-        url: "/info/getNews",
+        url: "/info/getNewsList",
         data: {
         },
         success: (res) => {
@@ -61,7 +61,7 @@ export default {
     getMatters() {
       config.http({
         method: "get",
-        url: "/info/getMatters",
+        url: "/info/getMattersList",
         data: {
         },
         success: (res) => {
