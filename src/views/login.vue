@@ -52,26 +52,14 @@ export default {
   },
   methods: {
     //登录、注册
-    handlelogin(type) {
+    async handlelogin(type) {
       console.log(this.$store);
       var that = this
       if(type == 1) {
-        config.http({
-          methods: "post",
-          url: "/login",
-          data: {
-            ...this.formData
-          },
-          success: (res) => {
-            console.log(res);
-            localStorage.setItem("loginUser", JSON.stringify(res.data));
-            that.$store.dispatch('user/setUserInfo',res.data)
-            that.$router.push('/home')
-          },
-          error: (e) => {
-            console.log(e);
-          }
-        })
+        await this.$store.dispatch('user/login',{...this.formData})
+        // 正常应该跳转页面 用路由守卫去调getInfo，由于登录后的页面没做 先这样
+        // this.$store.dispatch('user/getInfo')
+        this.$router.push('/home')
       } else if(type == 2) {
 
       }

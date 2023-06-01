@@ -8,6 +8,7 @@ import store from './store'
 import '@/styles/index.scss' // global css
 //好像这里不引入config 无法全局使用
 import config from './config';
+import './permission' // permission control
 Vue.use(ElementUI);
 Vue.config.productionTip = false;
 
