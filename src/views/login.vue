@@ -21,7 +21,7 @@
               <el-button class="btn" size="small" @click="handlelogin(2)">注册</el-button>
             </div>
             <div class="forget">
-              <span @click="handleForget">忘记密码</span>
+              <el-button type="text" @click="handleForget">忘记密码</el-button>
             </div>
           </el-form>
         </div>
@@ -53,21 +53,37 @@ export default {
   methods: {
     //登录、注册
     async handlelogin(type) {
-      console.log(this.$store);
       var that = this
       if(type == 1) {
-        await this.$store.dispatch('user/login',{...this.formData})
-        // 正常应该跳转页面 用路由守卫去调getInfo，由于登录后的页面没做 先这样
+        await this.$store.dispatch('user/login',{...this.formData}).then(res=>{
+          if(res.token){
+            this.$router.push('/home')
+          }else{
+            this.$alert(res.msg)
+          }
+        })
         // this.$store.dispatch('user/getInfo')
-        this.$router.push('/home')
+        // this.$router.push('/home')
       } else if(type == 2) {
-
+        config.http({
+          method:'post',
+          data:{...this.formData},
+          url:'/register',
+        success: (res) => {
+          if(res.msg=='操作成功'){
+            that.$alert("注册成功，可以直接登录")
+          }
+        },
+        error: (res) => {
+          that.$alert(res, "res");
+        },
+        })
       }
 
     },
     //忘记密码 跳转
     handleForget() {
-
+      this.$alert('暂不支持')
     },
   }
 }
@@ -120,7 +136,6 @@ export default {
         }
         .forget {
           color: #409eff;
-          margin-top: 20px;
           margin-left: 330px;
           font-size: 14px;
         }
