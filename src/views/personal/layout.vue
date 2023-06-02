@@ -57,8 +57,8 @@ export default {
   padding: 30px 0;
   background: #fff;
   .personal-layout-container {
-    margin-left: 60px;
-    width: 1600px;
+    margin: 0 auto;
+    width: 1400px;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -89,7 +89,10 @@ export default {
       }
     }
     .layout-con {
+      // margin-top:-145px;
+      margin-left: 10px;
       width: 1200px;
+      border: 1px solid #eee;
     }
   }
 }

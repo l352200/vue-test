@@ -2,7 +2,7 @@ import router from './router'
 import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css' // progress bar style
 // import getPageTitle from '@/utils/get-page-title'
-import { getToken } from '@/utils/auth' // get token from cookie
+import { getToken,removeToken } from '@/utils/auth' // get token from cookie
 import store from './store'
 import { Message } from 'element-ui'
 // import { dictData } from '@/api/index'
@@ -21,9 +21,11 @@ router.beforeEach(async (to, from, next) => {
       NProgress.done()
     } catch(error) {
       console.log(error, 'permission err');
+      Message.error(error || '无访问权限，请重新登录')
+      removeToken()
+      router.push('/home')
     }
   } else {
-    console.log(to, 'path');
     if(whileList.includes(to.path)||whileNameList.includes(to.name)) {
       next();
       NProgress.done()
