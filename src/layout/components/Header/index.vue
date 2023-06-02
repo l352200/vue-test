@@ -2,7 +2,7 @@
   <div class="app-header-wrapper">
     <div class="header-container">
       <div class="header-inner">
-        <img class="logo-item" :src="logo" alt="测试项目">
+        <img @click="handleJump('/home')" class="logo-item" :src="logo" alt="测试项目">
         <div class="text-item">富强 · 民主 · 文明 · 河蟹 · 自由 · 平等 · 公正 · 法制 · 爱国 · 敬业 · 诚信 · 友善</div>
         <div class="search-item">
           <el-input class="" v-model="searchItem" placeholder="请输入搜索关键词" @click="handleSearch"></el-input>
@@ -15,7 +15,7 @@
       <!-- <div class="visitor">
         <div class="visitor-text" @click="handleJumpLogin">登录/注册</div>
       </div> -->
-      <el-button v-if="!userInfo.username" class="login-btn" type="primary" round @click="handleJumpLogin">登录/注册</el-button>
+      <el-button v-if="!userInfo.username" class="login-btn" type="primary" round @click="handleJump('/login')">登录/注册</el-button>
       </div>
 
     </div>
@@ -47,8 +47,8 @@ export default {
 
     },
     //跳转登录
-    handleJumpLogin(){
-      this.$router.push('/login')
+    handleJump(url){
+      this.$router.push(url)
     },
     //退出登录
     handleLogOut(){
@@ -80,6 +80,7 @@ export default {
         width: 40px;
         height: 40px;
         margin-right: 200px;
+        cursor: pointer;
       }
       .text-item {
         font-size: 18px;

@@ -3,14 +3,37 @@ export const personRoutes = [{
   path: '/personal',
   component: Layout,
   redirect: '/personal/index',
-  // hidden: true,
+  hidden: true,
   children: [
     {
-      path: '/personal/index',
-      component: () => import('@/views/personal/index'),
-      name: 'personal',
+      path: 'management',
+      component: () => import('@/views/personal/layout'),
+      name: 'personalLayout',
+      redirect: '/personal/management/index',
       // hidden: true,
-      meta: { title: '个人中心' }
+      children: [
+        {
+          path: 'index',
+          component: () => import('@/views/personal/index'),
+          name: 'personalIndex',
+          // hidden: true,
+          meta: { title: '个人中心' },
+        },
+        {
+          path: 'userInfo',
+          component: () => import('@/views/personal/userInfo'),
+          name: 'personalUserInfo',
+          // hidden: true,
+          meta: { title: '用户信息' },
+        },
+        {
+          path: 'imgUpload',
+          component: () => import('@/views/personal/imgUpload'),
+          name: 'personalImgUpload',
+          // hidden: true,
+          meta: { title: '照片上传' },
+        },
+      ]
     },
   ]
 }]

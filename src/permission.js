@@ -8,6 +8,8 @@ import { Message } from 'element-ui'
 // import { dictData } from '@/api/index'
 // import { getConfigKey } from '@/api/common'
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
+const whileList=['/home','/login','/page/info']
+const whileNameList=['home','login','info']
 router.beforeEach(async (to, from, next) => {
   // start progress bar
   NProgress.start()
@@ -21,8 +23,14 @@ router.beforeEach(async (to, from, next) => {
       console.log(error, 'permission err');
     }
   } else {
-    next();
-    NProgress.done()
+    console.log(to, 'path');
+    if(whileList.includes(to.path)||whileNameList.includes(to.name)) {
+      next();
+      NProgress.done()
+    } else {
+      next(`/home?redirect=${to.fullPath}`)
+      NProgress.done()
+    }
   }
   // set page title
   // document.title = getPageTitle(to.meta.title)

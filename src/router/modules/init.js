@@ -7,9 +7,6 @@ export const constantRoutes = [{
   name: "base",
   component: Layout,
   redirect: '/home',
-  //   component: () =>
-  //       import ( /* webpackChunkName: "website" */ '../layout')
-  // }, // 首页
   children: [{
     path: '/home',
     name: "home",
@@ -21,7 +18,6 @@ export const constantRoutes = [{
     component: () =>
       import( /* webpackChunkName: "register" */ '@/views/login')
     },
-    // ...personRoutes,
   // 其他路径重置为home
   {
     path: ':code',

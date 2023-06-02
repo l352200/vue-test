@@ -57,13 +57,11 @@ export default {
       if(type == 1) {
         await this.$store.dispatch('user/login',{...this.formData}).then(res=>{
           if(res.token){
-            this.$router.push('/home')
+            this.$router.push('/personal/management/index')
           }else{
             this.$alert(res.msg)
           }
         })
-        // this.$store.dispatch('user/getInfo')
-        // this.$router.push('/home')
       } else if(type == 2) {
         config.http({
           method:'post',
