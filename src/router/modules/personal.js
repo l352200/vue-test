@@ -33,6 +33,13 @@ export const personRoutes = [{
           // hidden: true,
           meta: { title: '照片上传' },
         },
+        {
+          path: 'operateNote',
+          component: () => import('@/views/personal/operateNote'),
+          name: 'personalOperateNote',
+          // hidden: true,
+          meta: { title: '操作日志' },
+        },
       ]
     },
   ]

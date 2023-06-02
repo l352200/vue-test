@@ -30,6 +30,13 @@
                 </div>
               </template>
             </el-menu-item>
+            <el-menu-item index="/personal/management/operateNote">
+              <template #title>
+                <div class="layout-menu-title">
+                  <span class="txt">操作日志</span>
+                </div>
+              </template>
+            </el-menu-item>
           </el-menu>
         </div>
       </div>
@@ -60,7 +67,7 @@ export default {
     margin: 0 auto;
     width: 1400px;
     display: flex;
-    align-items: center;
+    // align-items: center;
     justify-content: space-around;
     .personal-layout-inner {
       width: 260px;
