@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import { constantRoutes, couponRoutes } from './routes';
+import { constantRoutes } from './modules/init';
+import { infoRoutes} from './modules/info';
+import { personRoutes } from './modules/personal';
 
 // 解决重复点击相同路由报错Bug，后续版本官方会解决
 const routerPush = Router.prototype.push;
@@ -19,7 +21,7 @@ Vue.use(Router);
 const createRouter = () => new Router({
     // mode: 'history', // require service support
     scrollBehavior: () => ({ y: 0 }),
-    routes: constantRoutes.concat(couponRoutes)
+    routes: [...constantRoutes,...infoRoutes,...personRoutes]
 })
 
 const routes = createRouter()

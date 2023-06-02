@@ -1,6 +1,7 @@
 
 import Layout from '@/layout'
-//带头尾组件
+
+//带头尾组件  父component: Layout,
 export const constantRoutes = [{
   path: '/',
   name: "base",
@@ -19,34 +20,24 @@ export const constantRoutes = [{
     name: "login",
     component: () =>
       import( /* webpackChunkName: "register" */ '@/views/login')
-  },
+    },
+    // ...personRoutes,
   // 其他路径重置为home
   {
     path: ':code',
     props: true,
     component: () => import('@/views/home/index'),
-    name: 'home',
+    name: 'home2',
     meta: { title: '首页' }
-  },]
+    },
+  ]
 },
 
 ]
 
-// 不带头尾组件
-export const couponRoutes = [
-  {
-    path: '/page/first',
-    name: "first",
-    component: () =>
-      import( /* webpackChunkName: "register" */ '@/views/page/first')
-  }, {
-    path: '/page/info/:id/:type',
-    props: true,
-    name: "info",
-    component: () =>
-      import( /* webpackChunkName: "register" */ '@/views/page/info')
-  }
-]
+
+
+
 // export const couponRoutes = [{
 //   path: '/coupon/home/index',
 //   component: () =>
