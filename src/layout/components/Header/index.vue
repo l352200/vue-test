@@ -8,7 +8,7 @@
           <el-input class="" v-model="searchItem" placeholder="请输入搜索关键词" @click="handleSearch"></el-input>
         </div>
       <div v-if="userInfo.username" class="img-con">
-        <img class="user-img" :src="userImg" alt="">
+        <img @click="handleJump('/personal/management/index')" class="user-img" :src="userImg" alt="">
         <div>欢迎你，{{userInfo.username}}</div>
         <div class="exit" @click="handleLogOut">退出</div>
       </div>
@@ -80,6 +80,7 @@ export default {
         width: 40px;
         height: 40px;
         margin-right: 200px;
+        margin-left: 100px;
         cursor: pointer;
       }
       .text-item {
@@ -106,6 +107,7 @@ export default {
       .user-img {
         width: 40px;
         height: 40px;
+        cursor: pointer;
       }
       .exit{
         color: #409eff;

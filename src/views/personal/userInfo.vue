@@ -69,11 +69,16 @@ export default {
           id:this.userInfo.id
         },
         success:(res)=>{
-          this.$message.success('修改成功！')
+          if(res.msg=='操作成功'){
+            this.$message.success('修改成功！')
+          }
           this.isEdit=!this.isEdit
         },
         error:(e)=>{
-          this.$message.success(e)
+          if(res.code==-1){
+            return
+          }
+          this.$message.error(e)
         }
       })
     },
