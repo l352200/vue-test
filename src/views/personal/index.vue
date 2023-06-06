@@ -7,10 +7,13 @@
           <div class="info-item">用户名 ： {{userInfo.username}}</div>
           <div class="info-item">性别 ： {{userInfo.sex==0?'未填写':(userInfo.sex==1?'男':'女')}}</div>
           <div class="info-item">年龄 ： {{userInfo.age?userInfo.age+'岁':'未填写'}}</div>
-          <div class="info-item">兴趣 ： {{userInfo.hobit?userInfo.age:'未填写'}}</div>
+          <div class="info-item">兴趣 ： {{userInfo.hobit?userInfo.hobit:'未填写'}}</div>
           <div class="info-item">网站年龄 ： {{handleDate(new Date(),'yyyy')-handleDate(userInfo.createdAt,'yyyy')}}年</div>
         </div>
       </div>
+      <!-- <div>
+        <el-button @click="handleJump()">文章管理</el-button>
+      </div> -->
     </div>
   </div>
 </template>
@@ -30,6 +33,9 @@ export default {
   methods:{
     handleDate(date,type){
       return formatDate(date,type)
+    },
+    handleJump(url){
+      this.$router.push(url)
     }
   }
 }

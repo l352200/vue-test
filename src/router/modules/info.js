@@ -6,5 +6,6 @@ export const infoRoutes = [{
   name: "info",
   component: () =>
     import( /* webpackChunkName: "register" */ '@/views/page/info')
-}
+},
+  
 ]

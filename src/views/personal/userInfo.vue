@@ -32,7 +32,7 @@
         </el-form>
         <div class="btn-con">
           <el-button @click="handleEdit" type="success" size="small">{{isEdit?'取消编辑':'编辑'}}</el-button>
-          <el-button @click="handleSave" type="primary" size="small" :disabled="!isEdit">保存</el-button>
+          <el-button @click="handleSave" type="primary" size="small" :disabled="!isEdit||isFormDataChange">保存</el-button>
         </div>
       </div>
     </div>
@@ -43,7 +43,10 @@
 import { mapGetters } from 'vuex'
 export default {
   computed:{
-    ...mapGetters(['userInfo'])
+    ...mapGetters(['userInfo']),
+    isFormDataChange(){
+      return this.formData.username==this.userInfo.username&&this.formData.age==this.userInfo.age&&this.formData.sex==this.userInfo.sex&&this.formData.hobit==this.userInfo.hobit
+    }
   },
   data() {
     return {

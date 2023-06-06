@@ -73,7 +73,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       getUser().then(response => {
         let { code, stuUser, permissions } = response;
-        if(code != 200) {
+        if(code !== 0) {
           reject('验证失败，请重新登录')
         }
         stuUser = {

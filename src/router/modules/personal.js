@@ -40,6 +40,13 @@ export const personRoutes = [{
           // hidden: true,
           meta: { title: '操作日志' },
         },
+        {
+          path: 'article',
+          component: () => import('@/views/personal/article'),
+          name: 'personalArticle',
+          // hidden: true,
+          meta: { title: '文章管理' },
+        },
       ]
     },
   ]

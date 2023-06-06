@@ -37,6 +37,13 @@
                 </div>
               </template>
             </el-menu-item>
+                        <el-menu-item index="/personal/management/article">
+              <template #title>
+                <div class="layout-menu-title">
+                  <span class="txt">文章管理</span>
+                </div>
+              </template>
+            </el-menu-item>
           </el-menu>
         </div>
       </div>

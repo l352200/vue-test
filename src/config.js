@@ -27,6 +27,22 @@ var config = {
             dangerouslyUseHTMLString: true,
         });
     },
+    confirmMsg(msg, params) {
+        params = params || {};
+        return window.confirmMsg(msg, '提示', {
+            confirmButtonText: params.confirmButtonText || '确定',
+            cancelButtonText: params.cancelButtonText || '取消',
+            confirmButtonClass: params.confirmButtonClass,
+            showCancelButton: params.showCancelButton,
+            closeOnClickModal: typeof (params.closeOnClickModal) == 'boolean' ? params.closeOnClickModal : true,
+            dangerouslyUseHTMLString: true
+            // type: 'warning'
+        }).then(() => {
+            return true;
+        }).catch(() => {
+            return false;
+        });
+    },
     http: function (params) {
         var me = this;
 
@@ -134,11 +150,12 @@ var config = {
                 //           confirmButtonText: '确定'
                 //       });
                 //   } else
-                if(data.code != 200) {
+                if(data.code) {
                     me.alertMsg('错误提示：' + data.msg, 'error');
                 }
 
                 if(params.error) {
+                    console.log(params,'error');
                     params.error(data);
                 }
             } else {
