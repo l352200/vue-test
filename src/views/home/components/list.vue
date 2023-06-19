@@ -7,8 +7,8 @@
         <div>{{handleDate(item.createdAt,'yyyy-MM')}}</div>
       </div>
       <div class="text-item">
-        <span @click="handleJumpNews(item.id)" class="text">
-        {{item.title}}
+        <span @click="item.type==1?handleJumpNews(item.id):handleJump(item.content)" class="text">
+          {{item.title}}
         </span>
       </div>
     </div>
@@ -39,21 +39,30 @@ export default {
 
     },
   },
+  created() {
+  },
   data() {
     return {
-      handleTips() {
 
-      },
-      //跳转单条咨询页
-      handleJumpNews(id){
-        this.$router.push('/page/info/'+id+'/1')
-      },
     }
   },
   methods: {
     // 格式日期
     handleDate(date, type) {
       return formatDate(date, type);
+    },
+    handleTips() {
+      this.$router.push('/info/search')
+    },
+    //跳转单条咨询页
+    handleJumpNews(id) {
+      window.open(location.origin + '/#/page/info/' + id + '/1')
+    },
+    handleJump(url) {
+      if(url.indexOf('https') == -1) {
+        url = 'https://' + url
+      }
+      window.open(url)
     },
   }
 }
@@ -99,7 +108,7 @@ export default {
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
-      .text{
+      .text {
         cursor: pointer;
       }
     }

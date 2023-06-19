@@ -28,6 +28,7 @@
           <el-table-column align="center" label="操作">
             <template slot-scope="{row}">
               <el-button type="primary" size="small" @click="handleChange(row)">修改</el-button>
+              <el-button type="danger" size="small" @click="handleDel(row)">删除</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -41,7 +42,7 @@
       <div>
         <el-form :model="formData" label-width="80px">
           <el-form-item label="发布方式" prop="subType">
-            <el-radio-group v-model="formData.subType">
+            <el-radio-group v-model="formData.subType" :disabled="[1,3].includes(formData.type)">
               <el-radio :label="1">自行编辑</el-radio>
               <el-radio :label="3">外部链接</el-radio>
             </el-radio-group>
@@ -139,7 +140,8 @@ export default {
       this.title = '修改文章资讯'
       this.formData = {
         ...row,
-        subType: 1
+        subType: row.type,
+        url: row.type == 3 ? row.content : ''
       }
     },
     //文章创建
@@ -147,52 +149,77 @@ export default {
       this.visible = true
       this.title = '创建文章资讯'
     },
+    //删除文章
+    handleDel(row) {
+      this.$confirm('确定要删除吗', '提示', {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消"
+      }).then(() => {
+        config.http({
+          method: 'post',
+          url: '/info/delPersonalArticle',
+          data: {
+            id: row.id
+          },
+          success: (res => {
+            if(res.code == 0) {
+              this.$message.success('操作成功')
+            }
+            this.handleLoadData()
+          }),
+          error: (e => {
+            console.log(e);
+          })
+        })
+      }).catch(() => { })
+    },
     //发布
     handleSub() {
-        if(this.title == '创建文章资讯') {
-          config.http({
-            method: 'post',
-            url: '/info/addPersonalArticle',
-            data: {
-              authorId: this.userInfo.id,
-              title: this.formData.title,
-              content: this.formData.subType==1?this.formData.content:this.formData.url,
-              type:this.formData.subType
-            },
-            success: (res => {
-              if(res.code == 0) {
-                this.$message.success('操作成功')
-              }
-              this.handleClose()
-              this.handleLoadData()
-            }),
-            error: (e => {
-              console.log(e);
-              this.handleClose()
-            })
+      if(this.title == '创建文章资讯') {
+        config.http({
+          method: 'post',
+          url: '/info/addPersonalArticle',
+          data: {
+            authorId: this.userInfo.id,
+            title: this.formData.title,
+            content: this.formData.subType == 1 ? this.formData.content : this.formData.url,
+            type: this.formData.subType
+          },
+          success: (res => {
+            if(res.code == 0) {
+              this.$message.success('操作成功')
+            }
+            this.handleClose()
+            this.handleLoadData()
+          }),
+          error: (e => {
+            console.log(e);
+            this.handleClose()
           })
-        } else if(this.title == '修改文章资讯') {
-          config.http({
-            method: 'post',
-            url: '/info/updatePersonalArticle',
-            data: {
-              id: this.formData.id,
-              title: this.formData.title,
-              content: this.formData.content
-            },
-            success: (res => {
-              if(res.code == 0) {
-                this.$message.success('修改成功')
-              }
-              this.handleClose()
-              this.handleLoadData()
-            }),
-            error: (e => {
-              console.log(e);
-              this.handleClose()
-            })
+        })
+      } else if(this.title == '修改文章资讯') {
+        config.http({
+          method: 'post',
+          url: '/info/updatePersonalArticle',
+          data: {
+            id: this.formData.id,
+            title: this.formData.title,
+            content: this.formData.subType == 1 ? this.formData.content : this.formData.url,
+            type: this.formData.subType
+          },
+          success: (res => {
+            if(res.code == 0) {
+              this.$message.success('修改成功')
+            }
+            this.handleClose()
+            this.handleLoadData()
+          }),
+          error: (e => {
+            console.log(e);
+            this.handleClose()
           })
-        }
+        })
+      }
     },
     //关闭弹窗
     handleClose() {
