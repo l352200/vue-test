@@ -8,8 +8,8 @@ import { Message } from 'element-ui'
 // import { dictData } from '@/api/index'
 // import { getConfigKey } from '@/api/common'
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
-const whileList=['/home','/login','/page/info','/info/search']
-const whileNameList=['home','login','infoSearch','infoItem']
+//白名单
+const whileList=['/home','/login','/page/info','/info/search','test1','/test/areaDemo']
 router.beforeEach(async (to, from, next) => {
   // start progress bar
   NProgress.start()
@@ -26,12 +26,13 @@ router.beforeEach(async (to, from, next) => {
       router.push('/home')
     }
   } else {
-    if(whileList.includes(to.path)||whileNameList.includes(to.name)) {
+    if(whileList.includes(to.path)||Boolean(process.env.VUE_APP_DEV_PERMISSION)) {
+      console.log(to.path,'to.path1');
       next();
       NProgress.done()
     } else {
-      console.log(to.path,'to.path');
-      console.log(to.name,'to.name');
+      console.log(to.path,'to.path2');
+      console.log(to.name,'to.name2');
       next(`/home?redirect=${to.fullPath}`)
       NProgress.done()
     }
