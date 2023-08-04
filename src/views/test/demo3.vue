@@ -2,12 +2,13 @@
   <!-- 测试请求数据后判断加载css文件并渲染 -->
   <!-- 1、请求
        2、使用$nextTick引入css文件
-       3、用v-if重新渲染对应元素
-       4、同时避免样式丢失的元素提前显示，可以使用v-loading
-       5、并将!loading作为条件绑给元素的v-if -->
+       3、同时避免样式丢失的元素提前显示，可以使用v-loading
+       4、要用v-if重新渲染对应元素
+       5、将!loading作为条件绑给元素的v-if   -->
   <div style="height:500px">
-    <div v-if="flag&&!loading" class="colorchange" v-loading="loading">
-      测试动态加载css文件,该文本初始为黑色，第一层css样式为红色，请求后应为蓝色
+    <div>请求数据结果：{{totalFLag}}</div>
+    <div v-if="!loading" class="colorchange" v-loading="loading">
+      测试动态加载css文件,该文本初始为黑色，请求结果为true，css样式为蓝色；为false，css样式为红色
     </div>
   </div>
 </template>
@@ -16,6 +17,11 @@
 
 export default {
   components: {},
+  computed: {
+    totalFLag() {
+      return this.total > 6
+    }
+  },
   data() {
     return {
       total: 0,
@@ -26,10 +32,8 @@ export default {
     };
   },
   async created() {
-    console.log(new Date().getTime());
     this.loading = true
     await this.getNews()
-    console.log(new Date().getTime());
     // this.$nextTick(() => {
     //   if(this.total > 6) {
     //     import('./blue.css')
@@ -50,17 +54,17 @@ export default {
         },
         success: (res) => {
           console.log(res, 'res');
-          this.flag = false
+          // this.flag = false
           this.list = res.rows;
           this.total = res.count;
           this.$nextTick(() => {
-            if(this.total > 6) {
+            if(this.totalFLag) {
               import('./style/blue.css')
             } else {
               import('./style/red.css')
             }
           })
-          this.flag = true
+          // this.flag = true
           this.loading = false
         },
         error: (res) => {
