@@ -4,7 +4,7 @@
       <div class="header-inner">
         <img @click="handleJump('/home')" class="logo-item" :src="logo" alt="测试项目" />
         <div class="text-item">
-          心灵鸡汤可以护养心灵,是一种对心灵有帮助的东西。
+          决心即力量,信心即成功。
         </div>
         <div class="search-item">
           <el-input class="" v-model="searchItem" placeholder="请输入搜索关键词">

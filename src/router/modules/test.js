@@ -9,11 +9,23 @@ export const testRoutes = [
   props: true,
   name: "test",
   children: [{
-    path: 'areaDemo',
+    path: 'demo1',
     props: true,
-    name: "areaDemo",
+    name: "demo1",
     component: () =>
-      import( /* webpackChunkName: "register" */ '@/views/test/areaDemo.vue')
-  }],
+      import( /* webpackChunkName: "register" */ '@/views/test/demo1.vue')
+  },{
+    path: 'demo2',
+    props: true,
+    name: "demo2",
+    component: () =>
+      import( /* webpackChunkName: "register" */ '@/views/test/demo2.vue')
+  },{
+    path: 'demo3',
+    props: true,
+    name: "demo3",
+    component: () =>
+      import( /* webpackChunkName: "register" */ '@/views/test/demo3.vue')
+  },],
 }
 ] 
