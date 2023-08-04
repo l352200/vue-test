@@ -28,7 +28,7 @@
           v-for="item in list"
           :key="item.id"
           @click.native="
-            item.type == 1 ? handleJumpNews(item.id) : handleJump(item.content)
+            item.type != 3 ? handleJumpNews(item) : handleJump(item.content)
           "
         >
           <div>
@@ -125,9 +125,8 @@ export default {
       });
     },
     //跳转单条咨询页
-    handleJumpNews(id) {
-      console.log(123);
-      window.open(location.origin + "/#/page/info/" + id + "/1");
+    handleJumpNews(item) {
+      window.open(location.origin + "/#/page/info/" + item.id + "/"+item.type);
     },
     handleJump(url) {
       if (url.indexOf("https") == -1) {
