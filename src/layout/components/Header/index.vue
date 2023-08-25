@@ -4,7 +4,7 @@
       <div class="header-inner">
         <img @click="handleJump('/home')" class="logo-item" :src="logo" alt="测试项目" />
         <div class="text-item">
-          决心即力量,信心即成功。
+          {{helloText}}
         </div>
         <div class="search-item">
           <el-input class="" v-model="searchItem" placeholder="请输入搜索关键词">
@@ -36,9 +36,12 @@ export default {
       userImg,
       logo,
       isLogin: false,
+      helloText: ''
     };
   },
-  created() { },
+  created() {
+    this.getAPIinfo()
+  },
   methods: {
     // 搜索
     handleSearch() {
@@ -54,6 +57,22 @@ export default {
       this.$store.dispatch("user/logOut");
       // this.$forceUpdate();
     },
+    getAPIinfo() {
+      config.http({
+        method: 'get',
+        url: 'https://v.api.aa1.cn/api/time-tx/index.php',
+        data: {
+
+        },
+        success: (res) => {
+          this.helloText = res.msg
+        },
+        error: (e) => {
+          console.log(e, 'e');
+        }
+      })
+
+    }
   },
 };
 </script>

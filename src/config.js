@@ -57,8 +57,9 @@ var config = {
         // } else {
         //     params.url = me.host + params.url;
         // }
-        params.url = me.host + params.url;
-
+        if(params.url.indexOf('http') == -1) {
+            params.url = me.host + params.url;
+        }
         var httpTime = new Date().getTime();
         // 请求增加时间入参，清除浏览器缓存
         if(params.url.indexOf('?') != -1) {
@@ -80,7 +81,8 @@ var config = {
             }).then(res => {
                 loading && loading.close();
                 var data = res.data;
-                if(data.code) {
+                // 第三方接口不限制code
+                if(data.code && params.url.indexOf('http') == -1) {
                     // if (data.code == 305) {
                     //     //未登录
                     //     me.alert('登录失效', {
@@ -155,7 +157,7 @@ var config = {
                 }
 
                 if(params.error) {
-                    console.log(params,'error');
+                    console.log(params, 'error');
                     params.error(data);
                 }
             } else {

@@ -7,8 +7,10 @@
        5、将!loading作为条件绑给元素的v-if   -->
   <div style="height:500px">
     <div>请求数据结果：{{totalFLag}}</div>
-    <div v-if="!loading" class="colorchange" v-loading="loading">
-      测试动态加载css文件,该文本初始为黑色，请求结果为true，css样式为蓝色；为false，css样式为红色
+    <div v-loading="loading">
+      <div v-if="!loading" class="colorchange">
+        测试动态加载css文件,该文本初始为黑色，组件内为绿色；请求结果为true，css样式为蓝色；为false，css样式为红色
+      </div>
     </div>
   </div>
 </template>
@@ -76,5 +78,8 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
+.colorchange {
+  color: green;
+}
 </style>
