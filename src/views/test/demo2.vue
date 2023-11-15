@@ -1,168 +1,199 @@
 <template>
   <div class="print-sign-wrapper">
-    <div class="block">
-      <el-cascader ref="cascader" class="cascader" v-model="value" :options="options" :props="props" collapse-tags clearable @change="handleChange">
-      </el-cascader>
-      <div v-if="value.length" class="area" @click="handleCascaderClick">
-        {{areaName}}
+    <div style="text-align:center">
+
+      <div style="margin-bottom:50px">测试预览</div>
+      <el-button @click="uploadFile">选取文件</el-button>
+      <el-button @click="goPreview">预览一下</el-button>
+      <div ref="file" id="message"></div>
+      <img :src="testUrl" alt="">
+      <div>{{testUrl}}</div>
+      <div style="margin-bottom:500px">
+        <a href="https://fjjsjxjy.test1.59iedu.com:9443/mfs/resource/public/2023/06/28/2ca4e7148894aff40188ffbbbbe40326.xls">
+          <el-button>
+            附件下载
+          </el-button>
+        </a>
       </div>
-      <div class="num" :style="areaNum>0?'':'background-color:white'" @click="handleCascaderClick">
-        <template v-if="areaNum>0">
-          +{{areaNum}}
-        </template>
-      </div>
+      <el-upload action="" :limit="1" :on-change="handleChange" :auto-upload="false" :file-list="fileList" :show-file-list="false">
+        <el-button v-loading="loading" :disabled="loading">上传</el-button>
+      </el-upload>
     </div>
-    <div>
-      <el-cascader class="cascader" v-model="value" :options="options" :props="props" collapse-tags clearable @change="handleChange">
-      </el-cascader>
-    </div>
-    {{value}}
   </div>
 </template>
 
 <script>
+// let docx = require("docx-preview");
+import mammoth from 'mammoth'
 export default {
   components: {},
   computed: {
-    areaNum() {
-      let flag3 = -1
-      if(this.value.length) {
-        let flag1 = 0
-        let flag2 = 0
-        this.value.map(item => {
-          if(item[0] == 1) {
-            flag1++
-          } else if(item[0] == 2) {
-            flag2++
-          }
-        })
-        console.log(flag1);
-        console.log(flag2);
-        if(flag1 == 9) flag3++
-        if(flag2 == 4) flag3++
-      } else {
-        return 0
-      }
-      console.log(flag3);
-      return flag3
-    },
-    areaName() {
 
-      return this.value[0][0] == 1 ? '东南' : '西北'
-    }
   },
   data() {
     return {
-      props: {
-        multiple: true,
-        // emitPath:false
-        // checkStrictly: true
-      },
-      options: [{
-        value: 1,
-        label: '东南',
-        children: [{
-          value: 11,
-          label: '上海',
-          children: [
-            { value: 111, label: '普陀' },
-            { value: 222, label: '黄埔' },
-            { value: 333, label: '徐汇' }
-          ]
-        }, {
-          value: 22,
-          label: '江苏',
-          children: [
-            { value: 444, label: '南京' },
-            { value: 555, label: '苏州' },
-            { value: 666, label: '无锡' }
-          ]
-        }, {
-          value: 33,
-          label: '浙江',
-          children: [
-            { value: 777, label: '杭州' },
-            { value: 888, label: '宁波' },
-            { value: 999, label: '嘉兴' }
-          ]
-        }]
-      }, {
-        value: 2,
-        label: '西北',
-        children: [{
-          value: 44,
-          label: '陕西',
-          children: [
-            { value: 101010, label: '西安' },
-            { value: 111111, label: '延安' }
-          ]
-        }, {
-          value: 55,
-          label: '新疆维吾尔族自治区',
-          children: [
-            { value: 121212, label: '乌鲁木齐' },
-            { value: 131313, label: '克拉玛依' }
-          ]
-        }]
-      }],
-      value: '',
-      dropDownFlag:true
-    };
+      testBlobUrl: '',
+      testUrl: '',
+      purl: ''
+
+    }
   },
-  created() {
-  },
+  // created() {
+  //   console.log("使用插件的renderAsync方法来渲染", docx);
+  // },
   mounted() { },
   methods: {
-    handleChange(value) {
-      console.log(value, 'val');
+    goPreview() {
+      //将文件转成arrayBuffer格式
+      let arrayBuffer = this.testUrl
+      let blob = this.bufToBlob(arrayBuffer)
+
+      mammoth.convertToHtml({ arrayBuffer: arrayBuffer })
+        .then((res) => {
+          document.getElementById('message').innerHTML = res.value
+          let obj = document.getElementById('message').children
+          //动态修改样式
+          for(let i = 0; i < obj.length; i++) {
+            obj[i].style.color = "#333"
+            obj[i].style.fontSize = "0.7rem"
+          }
+        }).done();
+
+      console.log(this.purl);
+      // window.open('http://www.pfile.com.cn/api/profile/onlinePreview?url=' + encodeURIComponent(this.purl));
+
+      // docx.renderAsync(blob, this.$refs.file);
     },
-    //级联选择器展开收起
-    handleCascaderClick(){
-      this.dropDownFlag=!this.dropDownFlag
-      if(this.dropDownFlag){
-        this.$refs.cascader.$el.click()
-      }else{
-        this.$refs.cascader.dropDownVisible = false
+    async uploadFile() {
+      const input = document.createElement('input')
+      input.setAttribute('type', 'file')
+      input.setAttribute('style', 'display:none')
+      // 将文件选择元素添加到文档中
+      document.body.appendChild(input)
+      // 触发文件选择元素的点击事件
+      input.click()
+      // 等待文件选择元素的change事件
+      const files = await new Promise((resolve, reject) => {
+        input.addEventListener('change', (e) => {
+          const files = Object.values(e.target.files) || []
+          // 从文档中移除文件选择元素
+          document.body.removeChild(input)
+          resolve(files)
+        })
+      })
+      const params = new FormData()
+      params.append('file', files[0], files[0].name)
+
+      const reader = new FileReader()
+      // result属性中保存的是被读取文件的ArrayBuffer数据对象
+      // reader.readAsArrayBuffer(files[0])
+
+      // result属性中将包含所读取文件的原始二进制数据
+      // reader.readAsBinaryString(files[0])
+
+      // result属性中将包含一个字符串以表示所读取的文件内容
+      // reader.readAsText(files[0])
+
+      // result属性中将包含一个data:URL格式的Base64字符串以表示所读取文件的内容 获取到的字符串可以直接预览
+      reader.readAsDataURL(files[0])
+      reader.onload = () => {
+        this.testUrl = reader.result
+        // window.open(this.testUrl)
+        // window.open(this.testUrl)
+        console.log(reader.result, 'reader');
+        this.testUrl = URL.createObjectURL(files[0])
+        window.open(this.testUrl)
+        var oA = document.createElement("a");
+        oA.download = '下载文件'; // 设置下载的文件名
+        oA.href = this.testUrl; //直接把后台返回的链接放进去下载
+        document.body.appendChild(oA);
+        oA.click();
+        oA.remove();
+        console.log(this.testUrl, 'new');
       }
-    }
+      console.log(files[0]);
+      // reader.onload = () => {
+      //   this.testUrl = reader.result
+      //   console.log(reader, 'reader');
+      //   this.testBlobUrl = path
+      //   // console.log(path, 'p')
+      //   const blob = this.base64ImgtoFile()
+      //   console.log(blob, 'bbb');
+      //   const blobUrl = window.URL.createObjectURL(blob)
+      //   this.purl = blobUrl
+
+      //   // 这里的文件名根据实际情况从响应头或者url里获取
+      //   // const filename = blob.name
+      //   // const a = document.createElement('a')
+      //   // a.href = blobUrl
+      //   // a.download = filename
+      //   // a.click()
+      //   // window.URL.revokeObjectURL(blobUrl)
+
+      //   // window.open(blobUrl)
+      // }
+    },
+    // arrayBuffer格式转Blob格式
+    bufToBlob(buf, mimeType = "") {
+      return new Blob([buf], { type: mimeType });
+    },
+
+    base64ImgtoFile(filename = 'file') {
+      const dataurl = this.testUrl
+      //将base64格式分割：['data:image/png;base64','XXXX']
+      const arr = dataurl.split(',')
+      // .*？ 表示匹配任意字符到下一个符合条件的字符 刚好匹配到：
+      // image/png
+      const mime = arr[0].match(/:(.*?);/)[1] //image/png
+      //[image,png] 获取图片类型后缀
+      const suffix = mime.split('/')[1] //png
+      const bstr = atob(arr[1]) //atob() 方法用于解码使用 base-64 编码的字符串
+      let n = bstr.length
+      const u8arr = new Uint8Array(n)
+      while(n--) {
+        u8arr[n] = bstr.charCodeAt(n)
+      }
+      return new File([u8arr], `${filename}.${suffix}`, {
+        type: mime
+      })
+    },
+    handleChange(file) {
+      this.fileList = []
+      console.log(file, 'formdata file');
+      let suffix = file.name.substring(file.name.length - 3, file.name.length)
+      if(suffix != 'xml') {
+        this.$message.error('请上传xml格式文件！')
+        return
+      }
+      let isLt = file.size / 1024 / 1024 < this.fileSize;
+      console.log(file.size / 1024 / 1024);
+      if(!isLt) {
+        this.$message.error(`上传文件大小不能超过 ${this.fileSize} MB!`);
+        return false;
+      }
+      this.loading = true
+      // console.log(fileLists);
+      // 本地服务器路径
+      // console.log(URL.createObjectURL(file.raw));
+      // 本地电脑路径
+      const params = new FormData()
+      params.append('file', file.raw, file.name)
+      importBankCodeByFile(params).then(res => {
+        if(res.code == 200) {
+          this.$message.success(res.msg)
+          this.loading = false
+        }
+        console.log(res);
+      }).catch((e) => {
+        this.loading = false
+      })
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
 .print-sign-wrapper {
-  padding: 20px;
-  .block {
-    position: relative;
-    // .cascader{
-    //   width: 100%;
-    // }
-    .area {
-      font-size: 12px;
-      position: absolute;
-      width: 100px;
-      height: 24px;
-      background: rgb(240, 242, 245);
-      border-radius: 4px;
-      top: 8px;
-      left: 8px;
-      text-align: center;
-      line-height: 22px;
-      color: rgb(156, 147, 143);
-    }
-    .num {
-      font-size: 12px;
-      position: absolute;
-      width: 42px;
-      height: 24px;
-      background: rgb(240, 242, 245);
-      border-radius: 4px;
-      top: 8px;
-      left: 138px;
-      text-align: center;
-      line-height: 22px;
-      color: rgb(156, 147, 143);
-    }
-  }
+  width: 100%;
 }
 </style>
