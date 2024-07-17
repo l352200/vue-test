@@ -31,7 +31,13 @@ export const testRoutes = [
     props: true,
     name: "demo4",
     component: () =>
-      import( /* webpackChunkName: "register" */ '@/views/test/demo3.vue')
+      import( /* webpackChunkName: "register" */ '@/views/test/demo4.vue')
+  },{
+    path: 'demo5',
+    props: true,
+    name: "demo5",
+    component: () =>
+      import( /* webpackChunkName: "register" */ '@/views/test/demo5.vue')
   },],
 }
 ] 

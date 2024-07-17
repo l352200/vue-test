@@ -33,7 +33,7 @@ export default {
     return {
       list1: [],
       count1: 0,
-            list2: [],
+      list2: [],
       count2: 0,
       headImg,
     }
@@ -84,6 +84,7 @@ export default {
     width: 1400px;
     margin: 0 auto;
     .home-inner {
+      height: 100%;
       display: flex;
       justify-content: space-around;
       .left-inner {

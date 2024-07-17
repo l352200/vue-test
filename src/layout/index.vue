@@ -1,6 +1,6 @@
 <template>
   <div class="home-wrapper">
-    <div class="home-inner">
+    <div class="home-inner" style="height: 100%;display:flex;flex-direction: column;justify-content: space-between">
       <app-header></app-header>
       <!-- <nav-bar v-if="showNav"></nav-bar> -->
       <!-- <div class="breadcrumb-container" v-if="showBread">
@@ -13,7 +13,9 @@
           </keep-alive>
         </div>
       </div>
-      <app-footer></app-footer>
+      <div style="">
+        <app-footer></app-footer>
+      </div>
     </div>
   </div>
 </template>
@@ -26,13 +28,13 @@ export default {
     AppHeader,
     AppFooter
   },
-  computed:{
-    cachedViews(){
+  computed: {
+    cachedViews() {
       //需要使用缓存的组件 需要用vuex存
       return ''
     }
   },
-  methods:{
+  methods: {
   }
 };
 </script>
@@ -40,6 +42,7 @@ export default {
 <style lang="scss" scoped>
 .home-wrapper {
   width: 100%;
+  height: 100%;
   box-sizing: border-box;
   .breadcrumb-container {
     width: 1200px;

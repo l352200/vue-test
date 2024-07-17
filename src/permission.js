@@ -33,7 +33,10 @@ router.beforeEach(async (to, from, next) => {
       NProgress.done()
     } else {
       console.log(to, 'to.path2');
-      next(`/home?redirect=${to.fullPath}`)
+      // 白名单控制
+      // next(`/home?redirect=${to.fullPath}`)
+      // 不管白名单
+      next()
       NProgress.done()
     }
   }
