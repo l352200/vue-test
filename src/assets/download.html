@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
+    <title>测试项目</title>
+    <!-- <title><%= htmlWebpackPlugin.options.title %></title> -->
+  </head>
+  <body>
+    <script>
+      const ua = navigator.userAgent.toLowerCase();
+      if (ua.indexOf("micromessenger") > -1) {
+        // 文件下载
+        header("Content-Description: File Transfer");
+        header("Content-Type: application/octet-stream");
+        header(
+          "Content-Disposition: attachment; filename=".basename(
+            "https://rsjxjy.dev.59iedu.com:9443/mfs/电子证照/mock6.2.4.ofd"
+          )
+        );
+        header("Expires: 0");
+        header("Cache-Control: must-revalidate");
+        header("Pragma: public");
+        header(
+          "Content-Length: ".filesize(
+            "https://rsjxjy.dev.59iedu.com:9443/mfs/电子证照/mock6.2.4.ofd"
+          )
+        );
+        readfile(
+          "https://rsjxjy.dev.59iedu.com:9443/mfs/电子证照/mock6.2.4.ofd"
+        );
+      } else {
+        console.log("触发html");
+        location.href = location + "/test/demo6";
+      }
+    </script>
+    <!-- <noscript>
+      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript> -->
+    <!-- built files will be auto injected -->
+  </body>
+</html>

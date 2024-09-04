@@ -38,6 +38,12 @@ export const testRoutes = [
     name: "demo5",
     component: () =>
       import( /* webpackChunkName: "register" */ '@/views/test/demo5.vue')
+  },{
+    path: 'demo6',
+    props: true,
+    name: "demo6",
+    component: () =>
+      import( /* webpackChunkName: "register" */ '@/views/test/demo6.vue')
   },],
 }
 ] 

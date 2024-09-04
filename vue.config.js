@@ -44,6 +44,19 @@ module.exports = {
       // 移除 preload 插件, 加快首次加载速度
       config.plugins.delete('preload');
     }
+    // config.module
+    //   .rule('html-rule')
+    //   .test(/\.html$/) // 用于匹配特定文件类型的正则表达式
+    //   .use('html-loader') // 使用的加载器名称
+    //   .loader('html-loader') // 加载器名称，再次声明以确保配置正确加载
+    //   .options({ /* 加载器的选项 */ });
+    // config.module
+    //   .rule('file-rule')
+    //   .test(/\.(png|jpe?g|gif)$/i) // 用于匹配特定文件类型的正则表达式
+    //   .use('file-loader') // 使用的加载器名称
+    //   .loader('file-loader') // 加载器名称，再次声明以确保配置正确加载
+    //   .options({ limit: 8192, /* 加载器的选项 */ });
+
   },
   devServer: { // 自定义服务配置
     port: PORT, // 修改的端口号
@@ -53,7 +66,7 @@ module.exports = {
         target: 'http://127.0.0.1:3004',
         changeOrigin: true,
         ws: true,
-    // secure: false
+        // secure: false
       },
       '/wx': {
         target: 'http://localhost:3001',
